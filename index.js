@@ -83,8 +83,9 @@ app.get('/',async(req,res,next)=>{
 
 })
 
-app.post('Users',async(req,res)=>{
+app.post('/Users',async(req,res)=>{
 try{
+	console.log('In Post');
 let ip=req.headers['X-Forwaded-For']|| req.connection.remoteAddress;
           console.log(ip); 
       await rateLimiterPost.consume(ip);    
