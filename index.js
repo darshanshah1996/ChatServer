@@ -141,11 +141,11 @@ io.on('connection',async (socket)=>{
 	socket.on('sendMessage',async (message)=>{
       try
       {
-          await rateLimiterMessagePosts.consume(socket.handshake.address);
+          await rateLimiterMessagePosts.consume(socket.handshake.headers['x-forwaded-for']);
           
 
       // console.log(roomsStack);
-       console.log(socket.handshake);		
+       console.log(socket.handshake.headers['x-forwaded-for']);		
 		if(roomsStack[message['name']])
 		{
 			io.to(roomsStack[message['name']]).emit('reciveMessage',message);
