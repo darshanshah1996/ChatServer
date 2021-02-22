@@ -145,7 +145,8 @@ io.on('connection',async (socket)=>{
           
 
       // console.log(roomsStack);
-       console.log(socket.handshake.headers['x-forwaded-for']);		
+      console.log('Headers fetch');
+       console.log(socket.handshake);		
 		if(roomsStack[message['name']])
 		{
 			io.to(roomsStack[message['name']]).emit('reciveMessage',message);
