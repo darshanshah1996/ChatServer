@@ -141,14 +141,11 @@ io.on('connection',async (socket)=>{
 	socket.on('sendMessage',async (message)=>{
       try
       {
-          await rateLimiterMessagePosts.consume(socket.handshake.headers['x-forwarded-for']);
+          await rateLimiterMessagePosts.consume(socket.handshake.headers['x-forwarded-for']||socket.handshake.address );
           
 
-      // console.log(roomsStack);
-      console.log('Headers fetch');
-      console.log(socket.handshake.headers);
-      console.log('x-forwarded-for');
-       console.log(socket.handshake.headers['x-forwarded-for']);		
+      
+     		
 		if(roomsStack[message['name']])
 		{
 			io.to(roomsStack[message['name']]).emit('reciveMessage',message);
@@ -160,14 +157,14 @@ io.on('connection',async (socket)=>{
      }
      catch(error)
      {
-     	console.log(error);
+     	
      	socket.emit('Blocked','Too many messsages.Only 1 message permitted per second');
      }	
 	})
 
 	socket.on('sendPost',async(message)=>{
 	try{
-		await rateLimiterMessagePosts.consume(socket.handshake.address);
+		await rateLimiterMessagePosts.consume(socket.handshake.headers['x-forwarded-for']||socket.handshake.address );
 		socket.broadcast.emit('postUpdate',message);
 	}	
 	catch(error)
