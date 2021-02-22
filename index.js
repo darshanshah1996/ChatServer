@@ -141,13 +141,13 @@ io.on('connection',async (socket)=>{
 	socket.on('sendMessage',async (message)=>{
       try
       {
-          await rateLimiterMessagePosts.consume(socket.handshake.headers['x-forwaded-for']);
+          await rateLimiterMessagePosts.consume(socket.handshake.headers['x-forwarded-for']);
           
 
       // console.log(roomsStack);
       console.log('Headers fetch');
       console.log(socket.handshake.headers);
-      console.log('x-forwaded-for');
+      console.log('x-forwarded-for');
        console.log(socket.handshake.headers['x-forwaded-for']);		
 		if(roomsStack[message['name']])
 		{
