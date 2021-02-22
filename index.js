@@ -148,7 +148,7 @@ io.on('connection',async (socket)=>{
       console.log('Headers fetch');
       console.log(socket.handshake.headers);
       console.log('x-forwarded-for');
-       console.log(socket.handshake.headers['x-forwaded-for']);		
+       console.log(socket.handshake.headers['x-forwarded-for']);		
 		if(roomsStack[message['name']])
 		{
 			io.to(roomsStack[message['name']]).emit('reciveMessage',message);
@@ -160,7 +160,7 @@ io.on('connection',async (socket)=>{
      }
      catch(error)
      {
-     	
+     	console.log(error);
      	socket.emit('Blocked','Too many messsages.Only 1 message permitted per second');
      }	
 	})
