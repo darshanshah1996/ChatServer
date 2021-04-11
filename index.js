@@ -31,8 +31,8 @@ const rateLimiterPost=new RateLimiterMemory(optsPost);
 let roomsStack={};
 
 
-const server=app.listen(process.env.PORT||7000,()=>{
-	console.log('listening on '+process.env.PORT||7000);
+const server=app.listen(7000,()=>{
+	console.log('listening on 7000');
 });
 
 
@@ -46,12 +46,12 @@ const server=app.listen(process.env.PORT||7000,()=>{
 
 io=require('socket.io')(server,{
   cors: {
-    origin: "https://chatworld-7dc64.web.app",
+    origin: "*",
     methods: ["GET", "POST","PUT","UPDATE","DELETE"]
   }
 });
 app.use((req,res,next)=>{
-	res.header('Access-Control-Allow-Origin','https://chatworld-7dc64.web.app');
+	res.header('Access-Control-Allow-Origin','*');
 	res.header('Access-Control-Allow-Headers','Origin,Accept ,Authorization,Content-Type,X-Requested-With,X-Auth-Token');
 	if(req.method==='OPTIONS')
 	{
